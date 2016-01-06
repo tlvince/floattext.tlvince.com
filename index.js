@@ -43,7 +43,7 @@ function floating (el, index, start, startWidth) {
   move()
 }
 
-var content = document.getElementById('float')
+var content = document.getElementById('content')
 
 function go() {
   var text = document.getElementById('text')
