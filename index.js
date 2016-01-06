@@ -1,5 +1,7 @@
+'use strict'
+
 function getRandomIntInclusive (min, max) {
-  return Math.floor(Math.random() * (max - min + 1)) + min;
+  return Math.floor(Math.random() * (max - min + 1)) + min
 }
 
 function floating (el, index, wordPositions, xOffset, yOffset) {
@@ -52,7 +54,7 @@ function floating (el, index, wordPositions, xOffset, yOffset) {
 
 var content = document.getElementById('content')
 
-function go() {
+function go () {
   var text = document.getElementById('text')
   var floaters = text.innerText.split(' ')
   var wordPositions = []
