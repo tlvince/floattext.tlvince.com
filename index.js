@@ -2,19 +2,26 @@ function getRandomIntInclusive (min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-var widths = []
-
-function floating (el, index, start, startWidth) {
+function floating (el, index, wordPositions, xOffset, yOffset) {
   var top = 100
   var letterSpacing = 10
 
-  var me = parseInt(el.offsetWidth, 10)
-  var width = widths[index - 1] || {width: startWidth, me: -letterSpacing}
-  width = width.width + width.me + letterSpacing
-  widths[index] = {width: width, me: me}
+  var wordWidth = parseInt(el.offsetWidth, 10)
 
-  el.style.top = start + 'px'
-  el.style.left = width + 'px'
+  var wordPosition = wordPositions[index - 1] || {
+    xOffset: xOffset,
+    wordWidth: -letterSpacing
+  }
+
+  wordPosition = wordPosition.xOffset + wordPosition.wordWidth + letterSpacing
+
+  wordPositions[index] = {
+    xOffset: wordPosition,
+    wordWidth: wordWidth
+  }
+
+  el.style.top = yOffset + 'px'
+  el.style.left = wordPosition + 'px'
 
   var moves = 0
 
@@ -48,6 +55,10 @@ var content = document.getElementById('content')
 function go() {
   var text = document.getElementById('text')
   var floaters = text.innerText.split(' ')
+  var wordPositions = []
+
+  var xOffset = (window.innerWidth / 2) - (text.offsetWidth / 2)
+  var yOffset = window.innerHeight
 
   var child = document.createElement('div')
   child.setAttribute('id', 'floaters')
@@ -58,7 +69,7 @@ function go() {
     el.setAttribute('class', 'floater')
     el.innerText = floater
     child.appendChild(el)
-    floating(el, i, window.innerHeight, (window.innerWidth / 2) - (text.offsetWidth / 2))
+    floating(el, i, wordPositions, xOffset, yOffset)
     el.style.opacity = 1
   }
 
