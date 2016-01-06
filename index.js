@@ -66,22 +66,21 @@ function go() {
   floaters.forEach(appendFloater)
 }
 
-content.addEventListener('input', function() {
+function toggleOpacity (focusContent) {
+  content.style.opacity = focusContent ? 1 : 0
+  var floaters = document.getElementById('floaters')
+  floaters.style.opacity = focusContent ? 0 : 1
+}
+
+function resetFloaters () {
   var floaters = document.getElementById('floaters')
   document.body.removeChild(floaters)
   go()
-}, false);
+}
 
-content.addEventListener('mouseover', function() {
-  content.style.opacity = 1
-  var floaters = document.getElementById('floaters')
-  floaters.style.opacity = 0
-})
-content.addEventListener('mouseout', function() {
-  content.style.opacity = 0
-  var floaters = document.getElementById('floaters')
-  floaters.style.opacity = 1
-})
+content.addEventListener('input', resetFloaters)
+content.addEventListener('mouseover', toggleOpacity.bind(null, true))
+content.addEventListener('mouseout', toggleOpacity.bind(null, false))
 
 go()
 content.style.opacity = 0
