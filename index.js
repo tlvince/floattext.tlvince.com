@@ -44,7 +44,6 @@ function floating (el, index, start, startWidth) {
 }
 
 var content = document.getElementById('float')
-var parent = document.body
 
 function go() {
   var text = document.getElementById('text')
@@ -52,7 +51,7 @@ function go() {
 
   var child = document.createElement('div')
   child.setAttribute('id', 'floaters')
-  parent.appendChild(child)
+  document.body.appendChild(child)
 
   function appendFloater (floater, i) {
     var el = document.createElement('span')
