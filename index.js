@@ -44,11 +44,11 @@ function floating (el, index, start, startWidth) {
 }
 
 var content = document.getElementById('float')
-var text = document.getElementById('text')
 var parent = document.body
 
 function go() {
-  var floaters = content.innerText.split(' ')
+  var text = document.getElementById('text')
+  var floaters = text.innerText.split(' ')
 
   var child = document.createElement('div')
   child.setAttribute('id', 'floaters')
