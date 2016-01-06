@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Float text</title>
+  <style type="text/css">
+    body {
+      margin: 0;
+    }
+    #floaters {
+      transition: opacity 1s ease-in-out;
+    }
+    p {
+      display: block;
+      font-size: 28pt;
+      text-align: center;
+      transition: opacity 1s ease-in-out;
+      outline: 0px solid transparent;
+    }
+    .floater {
+      position: absolute;
+      font-size: 28pt;
+      transition: top 1s, opacity 1s ease-in-out;
+      opacity: 0;
+    }
+  </style>
+</head>
+<body>
+  <p id="float" contenteditable="true">
+    <span id="text">Snow is not in a globe, but is on your nose.</span>
+  </p>
+  <script src="index.js"></script>
+</body>
+</html>

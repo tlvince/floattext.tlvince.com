@@ -1,0 +1,87 @@
+function getRandomIntInclusive (min, max) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+var widths = []
+
+function floating (el, index, start, startWidth) {
+  var top = 100
+  var letterSpacing = 10
+
+  var me = parseInt(el.offsetWidth, 10)
+  var width = widths[index - 1] || {width: startWidth, me: -letterSpacing}
+  width = width.width + width.me + letterSpacing
+  widths[index] = {width: width, me: me}
+
+  el.style.top = start + 'px'
+  el.style.left = width + 'px'
+
+  var moves = 0
+
+  function move () {
+    function setMargin () {
+      var offset = getRandomIntInclusive(1, 100)
+      var binary = getRandomIntInclusive(0, 1)
+
+      var i = 0
+      if (binary || moves < 10) {
+        i = -offset
+      } else {
+        i = offset
+      }
+
+      el.style.top = top + i + 'px'
+      moves++
+      move()
+    }
+
+    var delay = getRandomIntInclusive(1, 500)
+
+    window.setTimeout(setMargin, delay)
+  }
+
+  move()
+}
+
+var content = document.getElementById('float')
+var text = document.getElementById('text')
+var parent = document.body
+
+function go() {
+  var floaters = content.innerText.split(' ')
+
+  var child = document.createElement('div')
+  child.setAttribute('id', 'floaters')
+  parent.appendChild(child)
+
+  function appendFloater (floater, i) {
+    var el = document.createElement('span')
+    el.setAttribute('class', 'floater')
+    el.innerText = floater
+    child.appendChild(el)
+    floating(el, i, window.innerHeight, (window.innerWidth / 2) - (text.offsetWidth / 2))
+    el.style.opacity = 1
+  }
+
+  floaters.forEach(appendFloater)
+}
+
+content.addEventListener('input', function() {
+  var floaters = document.getElementById('floaters')
+  document.body.removeChild(floaters)
+  go()
+}, false);
+
+content.addEventListener('mouseover', function() {
+  content.style.opacity = 1
+  var floaters = document.getElementById('floaters')
+  floaters.style.opacity = 0
+})
+content.addEventListener('mouseout', function() {
+  content.style.opacity = 0
+  var floaters = document.getElementById('floaters')
+  floaters.style.opacity = 1
+})
+
+go()
+content.style.opacity = 0
