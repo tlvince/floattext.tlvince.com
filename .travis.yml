@@ -10,7 +10,7 @@ node_js:
 before_script:
   - npm prune
 after_success:
-  - if [[ $TRAVIS_BRANCH == 'master' ]]; npm run build && npm run deploy; fi
+  - if [[ $TRAVIS_BRANCH == 'master' ]]; then npm run build && npm run deploy; fi
   - npm run semantic-release
 branches:
   except:
