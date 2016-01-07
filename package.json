@@ -26,5 +26,9 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/tlvince/floattext.tlvince.com.git"
+  },
+  "gh-pages-deploy": {
+    "staticpath": "dist",
+    "noprompt": true
   }
 }
